@@ -45,9 +45,9 @@ extension IntentViewController: INUIHostedViewControlling {
         
         // Different UIs can be displayed depending if the intent is in the confirmation phase or the handle phase.
         var desiredSize = CGSize.zero
-        if interaction.intentHandlingStatus == .ready {
+        if interaction.intentHandlingStatus == .ready { // confirmation phase
             desiredSize = displayInvoice(for: order, from: intent)
-        } else if interaction.intentHandlingStatus == .success {
+        } else if interaction.intentHandlingStatus == .success { // handle phase
             if let response = interaction.intentResponse as? OrderSoupIntentResponse {
                 desiredSize = displayOrderConfirmation(for: order, from: intent, with: response)
             }
@@ -61,12 +61,12 @@ extension IntentViewController: INUIHostedViewControlling {
         invoiceView.totalPriceLabel.text = order.localizedCurrencyValue
         invoiceView.unitPriceLabel.text = "\(order.quantity) @ \(order.menuItem.localizedCurrencyValue)"
         
-        let intentImage = intent.image(forParameterNamed: "soup")
-        intentImage?.fetchUIImage { [weak self] (image) in
-            DispatchQueue.main.async {
-                self?.invoiceView.imageView.image = image
-            }
-        }
+//        let intentImage = intent.image(forParameterNamed: "soup")
+//        intentImage?.fetchUIImage { [weak self] (image) in
+//            DispatchQueue.main.async {
+//                self?.invoiceView.imageView.image = image
+//            }
+//        }
         
         let optionText = intent.options != nil ? order.localizedOptionString : ""
         invoiceView.optionsLabel.text = optionText
@@ -89,12 +89,12 @@ extension IntentViewController: INUIHostedViewControlling {
             confirmationView.timeLabel.text = "\(waitTime) Minutes"
         }
 
-        let intentImage = intent.image(forParameterNamed: "soup")
-        intentImage?.fetchUIImage { [weak self] (image) in
-            DispatchQueue.main.async {
-                self?.invoiceView.imageView.image = image
-            }
-        }
+//        let intentImage = intent.image(forParameterNamed: "soup")
+//        intentImage?.fetchUIImage { [weak self] (image) in
+//            DispatchQueue.main.async {
+//                self?.invoiceView.imageView.image = image
+//            }
+//        }
 
         view.addSubview(confirmationView)
         

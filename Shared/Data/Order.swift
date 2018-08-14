@@ -82,8 +82,8 @@ extension Order {
         orderSoupIntent.soup = INObject(identifier: menuItem.itemNameKey, display: menuItem.localizedString)
         
         if let image = UIImage(named: menuItem.iconImageName),
-            let data = image.pngData() {
-            orderSoupIntent.setImage(INImage(imageData: data), forParameterNamed: "soup")
+            let _ = image.pngData() {
+//            orderSoupIntent.setImage(INImage(imageData: data), forParameterNamed: "soup")
         }
         
         orderSoupIntent.options = menuItemOptions.map { (option) -> INObject in
